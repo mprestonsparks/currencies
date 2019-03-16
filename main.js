@@ -1,4 +1,7 @@
 
+var latestRates = {};
+var weakestCurrency;
+
 function fixerNotes() {
     // Fixer API
     // Documentation: https://fixer.io/documentation
@@ -18,22 +21,42 @@ function getLatestRates() {
         url: getLatestRatesURL,
         method: "GET"
     }).then(function (response) {
-        var USD = response.rates.USD;
-        var EUR = response.rates.EUR; // Euro
-        var AUD = response.rates.AUD; // Australian Dollar
-        var INR = response.rates.INR; // Indian Rupee
         // setup USD as base currency (free version uses EUR base)
-        var base = USD/EUR;
-        var USDtoEUR = EUR/base;
-        var USDtoAUD = AUD/base;
-        var USDtoINR = INR/base;
+        var base = response.rates.USD/response.rates.EUR;
+        // https://stackoverflow.com/questions/16095301/finding-highest-values-amongst-javascript-variables
+        latestRates = [
+            {symbol: "USD", rate: response.rates.USD/base}, // US Dollar
+            {symbol: "BTC", rate: response.rates.BTC/base}, // BitCoin
+            {symbol: "AUD", rate: response.rates.AUD/base}, // Australian Dollar
+            {symbol: "EUR", rate: response.rates.EUR/base}, // Euro
+            {symbol: "INR", rate: response.rates.INR/base}, // Indian Rupee
+        ];
         console.log(response);
-        console.log(base);
-        console.log("USD:EUR ",USDtoEUR);
-        console.log("USD:AUD ",USDtoAUD);
-        console.log("USD:INR ",USDtoINR);
-
+        console.log("latestRates... ", latestRates);
+        console.log("BitCoin Price...", latestRates[0].rate/latestRates[1].rate);
     })};
 
+
+function findWeakestCurrency() {
+    var weakestSoFar = 0;
+    var result;
+    for (var i = 0; i < latestRates.length; i++) {
+        if (latestRates[i].rate > weakestSoFar) {
+            result = latestRates[i];
+            weakestSoFar = latestRates[i].rate;
+        }
+    }
+    return result;
+}
+weakestCurrency = findWeakestCurrency();
+console.log("weakest...",weakestCurrency);
+
+
+
+
+
+
+
+
+// >>>>>>>>>>>>>>>>>>>> CALL FUNCTIONS <<<<<<<<<<<<<<<<<<<<
 getLatestRates();
-       
