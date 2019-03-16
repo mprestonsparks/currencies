@@ -1,6 +1,11 @@
 
+
 var latestRates = {};
 var weakestCurrency;
+// >*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<
+
+getLatestRates();
+// >*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<
 
 function fixerNotes() {
     // Fixer API
@@ -23,7 +28,6 @@ function getLatestRates() {
     }).then(function (response) {
         // setup USD as base currency (free version uses EUR base)
         var base = response.rates.USD/response.rates.EUR;
-        // https://stackoverflow.com/questions/16095301/finding-highest-values-amongst-javascript-variables
         latestRates = [
             {symbol: "USD", rate: response.rates.USD/base}, // US Dollar
             {symbol: "BTC", rate: response.rates.BTC/base}, // BitCoin
@@ -32,31 +36,23 @@ function getLatestRates() {
             {symbol: "INR", rate: response.rates.INR/base}, // Indian Rupee
         ];
         console.log(response);
-        console.log("latestRates... ", latestRates);
-        console.log("BitCoin Price...", latestRates[0].rate/latestRates[1].rate);
+        console.log(latestRates);
+        weakestCurrency = findWeakestCurrency();
+        console.log("weakest...",weakestCurrency);
     })};
 
-
 function findWeakestCurrency() {
-    var weakestSoFar = 0;
-    var result;
-    for (var i = 0; i < latestRates.length; i++) {
+    var weakestSoFar = 1;
+    var result = [];
+    var size = Object.keys(latestRates).length;
+    console.log("size...",size);
+    for (var i = 0; i < size; i++) {
         if (latestRates[i].rate > weakestSoFar) {
-            result = latestRates[i];
             weakestSoFar = latestRates[i].rate;
-        }
-    }
+            result = latestRates[i].symbol;
+        };
+    };
     return result;
 }
-weakestCurrency = findWeakestCurrency();
-console.log("weakest...",weakestCurrency);
 
-
-
-
-
-
-
-
-// >>>>>>>>>>>>>>>>>>>> CALL FUNCTIONS <<<<<<<<<<<<<<<<<<<<
-getLatestRates();
+console.log(latestRates)
