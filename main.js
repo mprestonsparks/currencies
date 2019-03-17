@@ -55,4 +55,6 @@ function findWeakestCurrency() {
     return result;
 }
 
-console.log(latestRates)
+var test = setTimeout(getLatestRates,2000);
+var test2 = latestRates.symbol;
+console.log(test2);

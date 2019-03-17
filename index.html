@@ -8,10 +8,54 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
+    <link rel="stylesheet" type="text/css" href="style.css">
+
     <title>CurrenciesPS</title>
 </head>
 <body>
+    <div class="container-fluid">
+        <div class="row" id="header-section">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1>
+                        eQualityCoin <br><small>Price-Stable Crypto</small>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="wallet-setup-section">
+            <div class="col-md-6">
+                <div class="container">
+                    <form role="form" class="form-inline">
+                        <div class="form-group">
+                            <label for="INRWallet">
+                                USD Wallet 
+                            </label>
+                            <input type="number" class="form-control" id="INR-Wallet" />
+                        </div> 
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="container">
+                    <form role="form" class="form-inline">
+                        <div class="form-group">
+                            <label for="INRWallet">
+                                INR Wallet 
+                            </label>
+                            <input type="number" class="form-control" id="INR-Wallet" />
+                        </div> 
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     
 </body>
 <script src="main.js"></script>
