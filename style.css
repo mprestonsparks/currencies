@@ -4,6 +4,14 @@
     font-weight: bold;
 }
 
+.bigger-text {
+    font-size: 150%;
+}
+
+.align-top {
+    vertical-align: top;
+}
+
 .underline {
     text-decoration-line: underline;
     text-decoration-style: solid;
@@ -19,6 +27,10 @@
 
 .bottom-margin {
     margin: 0 0 1.5% 0;
+}
+
+.display-inline {
+    display: inline-block;
 }
 
 /* ELEMENT SPECIFIC STYLES */
