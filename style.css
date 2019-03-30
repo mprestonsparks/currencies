@@ -1,19 +1,41 @@
 
-#header-section {
-    margin: 2% 0 0 0;
+/* GENERIC STYLES */
+.bold {
+    font-weight: bold;
+}
+
+.underline {
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+}
+
+.center-text {
     text-align: center;
 }
 
+.top-margin {
+    margin: 1.5% 0 0 0;
+}
+
+.bottom-margin {
+    margin: 0 0 1.5% 0;
+}
+
+/* ELEMENT SPECIFIC STYLES */
 #wallet-setup-section {
     margin: 10% 0 0 0;
 }
 
 .wallet-labels {
-    margin: 40px 0 0 0;
+    /* margin: 40px 0 1.5% 0; */
     font-weight: bold;
 }
 
 form label {
     margin: 0 10px 0 0;
+}
+
+.exchange-rates {
+    margin: 4% 0 0 2%;
 }
 
