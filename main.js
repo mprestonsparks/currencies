@@ -33,12 +33,16 @@ function getLatestRates() {
             {symbol: "BTC", rate: response.rates.BTC/base}, // BitCoin
             {symbol: "AUD", rate: response.rates.AUD/base}, // Australian Dollar
             {symbol: "EUR", rate: response.rates.EUR/base}, // Euro
-            {symbol: "INR", rate: response.rates.INR/base}, // Indian Rupee
+            {symbol: "INR", rate: response.rates.INR/base} // Indian Rupee
         ];
         console.log(response);
         console.log(latestRates);
         weakestCurrency = findWeakestCurrency();
         console.log("weakest...",weakestCurrency);
+
+        writeRatesToPage();
+        // console.log("testing rate",latestRates);
+
     })};
 
 function findWeakestCurrency() {
@@ -55,6 +59,31 @@ function findWeakestCurrency() {
     return result;
 }
 
-var test = setTimeout(getLatestRates,2000);
-var test2 = latestRates.symbol;
-console.log(test2);
+
+function writeRatesToPage(USDtoINR, USDtoXBT, INRtoUSD) {
+    // USD:INR to 6 decimals
+    var USDtoINR_unrounded = latestRates[4].rate;
+    var USDtoINR = USDtoINR_unrounded.toFixed(6);
+    $("#usd-inr-rate").append(USDtoINR);
+    // USD:EQC
+
+    // USD:XBT to 6 decimals
+    var USDtoXBT_unrounded = latestRates[1].rate;
+    var USDtoXBT = USDtoXBT_unrounded.toFixed(6);
+    $("#usd-xbt-rate").append(USDtoXBT);
+
+    // INR:USD
+    var INRtoUSD_unrounded = (1/latestRates[4].rate)
+    var INRtoUSD = INRtoUSD_unrounded.toFixed(6);
+    $("#inr-usd-rate").append(INRtoUSD);
+    // INR:EQC
+
+    // INR:XBT
+    var INRtoXBT_unrounded = latestRates[1].rate/USDtoINR_unrounded;
+    var INRtoXBT = INRtoXBT_unrounded.toFixed(6); 
+    $("#inr-xbt-rate").append(INRtoXBT);
+}
+
+
+// Update rates every 5 seconds
+// var updateRates = setInterval(getLatestRates,5000);
