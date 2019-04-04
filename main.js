@@ -4,7 +4,7 @@ var latestRates = {};
 var weakestCurrency;
 // >*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<
 
-getLatestRates();
+// getLatestRates();
 // >*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<>*<
 
 function fixerNotes() {
@@ -58,16 +58,12 @@ function findWeakestCurrency() {
     return result;
 }
 
-// function writeToPage() {
-//     writeRates();
-//     writeBalances();
-// }
-
 function writeToPage() {
     // US Dollar Exchange Rates
         // USD:INR Exchange Rate to 6 decimals
         var USDtoINR_unrounded = latestRates[4].rate;
         var USDtoINR = USDtoINR_unrounded.toFixed(6);
+        $("#usd-inr-rate").empty();
         $("#usd-inr-rate").append(USDtoINR);
 
         // USD:EQC
@@ -75,16 +71,19 @@ function writeToPage() {
         // USD:XBT to 6 decimals
         var USDtoXBT_unrounded = latestRates[1].rate;
         var USDtoXBT = USDtoXBT_unrounded.toFixed(6);
+        $("#usd-xbt-rate").empty();
         $("#usd-xbt-rate").append(USDtoXBT);
 
     // US Dollar Wallet Balances
         // USD Wallet Initial Balance
         var USDBalance_Initial = 1000;
+        $(".usd-wallet-initial").empty();
         $(".usd-wallet-initial").append("$"+(USDBalance_Initial).toFixed(2));
 
         // USD Wallet Balance in INR
         var USDBalanceInINR_unrounded = USDBalance_Initial * USDtoINR_unrounded;
         var USDBalanceInINR = USDBalanceInINR_unrounded.toFixed(2);
+        $("#usd-inr-balance").empty();
         $("#usd-inr-balance").append("&#8377;"+USDBalanceInINR);
 
         // USD Wallet Balance in EQC
@@ -92,29 +91,34 @@ function writeToPage() {
         // USD Wallet Balance in XBT
         var USDBalanceInXBT_unrounded = USDBalance_Initial * USDtoXBT_unrounded;
         var USDBalanceInXBT = USDBalanceInXBT_unrounded.toFixed(6);
+        $("#usd-xbt-balance").empty();
         $("#usd-xbt-balance").append("&#x20BF;"+USDBalanceInXBT);
 
     // Indian Rupee Exchange Rates
         // INR:USD
         var INRtoUSD_unrounded = (1/latestRates[4].rate)
         var INRtoUSD = INRtoUSD_unrounded.toFixed(6);
+        $("#inr-usd-rate").empty();
         $("#inr-usd-rate").append(INRtoUSD);
         
         // INR:EQC
 
         // INR:XBT
         var INRtoXBT_unrounded = latestRates[1].rate/USDtoINR_unrounded;
-        var INRtoXBT = INRtoXBT_unrounded.toFixed(6); 
+        var INRtoXBT = INRtoXBT_unrounded.toFixed(6);
+        $("#inr-xbt-rate").empty();
         $("#inr-xbt-rate").append(INRtoXBT);
 
     // Indian Rupee Wallet Balances
         // INR Wallet Initial Balance
         var INRBalance_Initial = 1000.00;
+        $(".inr-wallet-initial").empty();
         $(".inr-wallet-initial").append("&#8377;"+(INRBalance_Initial).toFixed(2));
 
         // INR Wallet Balance in USD
         var INRBalanceInUSD_unrounded = INRBalance_Initial * INRtoUSD_unrounded;
         var INRBalanceInUSD = INRBalanceInUSD_unrounded.toFixed(2);
+        $("#inr-usd-balance").empty();
         $("#inr-usd-balance").append("$"+INRBalanceInUSD);
 
         // INR Wallet Balance in EQC
@@ -122,16 +126,14 @@ function writeToPage() {
         // INR Wallet Balance in XBT
         var INRBalanceInXBT_unrounded = INRBalance_Initial * INRtoXBT_unrounded;
         var INRBalanceInXBT = INRBalanceInXBT_unrounded.toFixed(6);
+        $("#inr-xbt-balance").empty();
         $("#inr-xbt-balance").append("&#x20BF;"+INRBalanceInXBT);
 }
 
-// function writeBalances() {
-//     var USDBalance_Initial = 1000;
-//     var USDBalance_INR = USDBalance_Initial / USDtoINR_unrounded;
-//     $("#usd-inr-balance").append(USDBalance_INR);
-//     console.log("usd-inr-balance...",USDBalance_INR);
-// }
 
 
 // Update rates every 5 seconds
-// var updateRates = setInterval(getLatestRates,5000);
+function updateRates() {
+    setInterval(getLatestRates,5000);
+}
+updateRates();
