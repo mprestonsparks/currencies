@@ -58,6 +58,8 @@ function findWeakestCurrency() {
     return result;
 }
 
+
+
 function writeToPage() {
     // US Dollar Exchange Rates
         // USD:INR Exchange Rate to 6 decimals
@@ -128,12 +130,32 @@ function writeToPage() {
         var INRBalanceInXBT = INRBalanceInXBT_unrounded.toFixed(6);
         $("#inr-xbt-balance").empty();
         $("#inr-xbt-balance").append("&#x20BF;"+INRBalanceInXBT);
-}
 
+
+        // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+        var base1 = 1/(USDtoINR_unrounded);
+        var USDEQC1 = base1 + 1;
+        var USDEQC2 = base1/USDEQC1;
+
+        var base2 = 1;
+        var INREQC1 = base2 + base1;
+        var INREQC2 = base2 / INREQC1;
+
+        console.log("base 1...",base1);
+        console.log("USD 1...",USDEQC2);
+        console.log("~~~~~~~~~~~");
+        console.log("base 2...",base2);
+        console.log("INR 2...",INREQC2);
+        console.log("~~~~~~~~~~~");
+        console.log(USDEQC2 + INREQC2);
+
+}
 
 
 // Update rates every 5 seconds
 function updateRates() {
     setInterval(getLatestRates,5000);
 }
-updateRates();
+// updateRates();
+
+getLatestRates();
